@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+	<head>
+		<title>chat</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="css/index.css">
+	</head>
+	<body>
+		<div class="container" id="message-view">
+			<div class="chat-header">
+				<h3>Chat</h3>
+			</div>
+			<div class="chat-content scroll" id="content">
+				<ul class="message-list" id="messages"></ul>
+			</div>
+			<div class="chat-footer">
+				<form id="message-form" class="message-input-div">
+						<div>
+							<input class="message-input" id="m" placeholder="Enter Message" autocomplete="off">
+						</div>
+						<button class="message-send">Send</button>					
+				</form>
+			</div>
+		</div>
+		<div class="container" id="login">
+			<div class="chat-header">
+				<h3>Chat Login</h3>
+			</div>
+			<div>
+				<form class="login-bg" id="login-form">
+						<input type="text" id="name" class="login-input" placeholder="Enter name" required autofocus>
+						<input type="submit" class="login-btn" value="Login">
+				</form>
+			</div>
+		</div> 
+		<script src="js/socket.io.js"></script>
+		<script src="js/jquery.js"></script>
+		<script src="js/index.js"></script>
+	</body>
+</html>
