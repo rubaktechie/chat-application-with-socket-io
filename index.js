@@ -13,6 +13,9 @@ app.get('/', function(req, res){
 });
 
 nsp.on('connection', function(socket){
+	socket.on("useradded",function(user){
+		socket.broadcast.emit("useradded", user);
+	});
 	socket.on('send-message', function(msg){
 		nsp.emit('receive-message', msg);
 	});
