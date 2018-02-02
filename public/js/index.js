@@ -8,6 +8,7 @@ $(function () {
 	$('#login-form').submit(function(e){
 		e.preventDefault();
 		user = $('#name').val();
+		socket.emit("useradded",user);
 		login_div.style.display = "none";
 		message_div.style.display = "grid";
 		$('#m').focus();
@@ -20,6 +21,11 @@ $(function () {
 		$('#m').val('');
 		$('#m').focus();
 	});
+	
+	socket.on('useradded',function(user){
+		$('#messages').append('<li class="info">'+user+' connected</li>');
+	});
+	
 	socket.on('receive-message', function(received_data) {
 		if (received_data['user'] == user) {
 			$('#messages').append('<li><h3 class="message-span to">'+received_data['msg']+'</h3></li>');
