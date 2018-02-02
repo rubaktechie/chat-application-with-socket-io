@@ -19,6 +19,10 @@ nsp.on('connection', function(socket){
 	socket.on('send-message', function(msg){
 		nsp.emit('receive-message', msg);
 	});
+	socket.on("disconnect", function(){
+		if(socket.user)
+			socket.broadcast.emit("userleft", socket.user);
+	});
 });
 
 http.listen(port, function(){
