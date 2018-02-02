@@ -25,7 +25,9 @@ $(function () {
 	socket.on('useradded',function(user){
 		$('#messages').append('<li class="info">'+user+' connected</li>');
 	});
-	
+	socket.on("userleft",function(user){
+		$('#messages').append('<li class="info">'+user+' left</li>');
+	});
 	socket.on('receive-message', function(received_data) {
 		if (received_data['user'] == user) {
 			$('#messages').append('<li><h3 class="message-span to">'+received_data['msg']+'</h3></li>');
