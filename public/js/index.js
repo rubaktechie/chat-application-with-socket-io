@@ -12,6 +12,7 @@ $(function () {
 		login_div.style.display = "none";
 		message_div.style.display = "grid";
 		$('#m').focus();
+		return false;
 	});
 
 	$('#message-form').submit(function(e) {
@@ -20,6 +21,7 @@ $(function () {
 		socket.emit('send-message', {user, msg});
 		$('#m').val('');
 		$('#m').focus();
+		return false;
 	});
 	
 	socket.on('useradded',function(user){
