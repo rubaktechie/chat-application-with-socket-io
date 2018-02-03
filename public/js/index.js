@@ -5,23 +5,22 @@ $(function () {
 	var socket = io("/private");
 	var user = "";
 
-	$('#login-form').submit(function(e){
-		e.preventDefault();
-		user = $('#name').val();
-		socket.emit("useradded",user);
-		login_div.style.display = "none";
-		message_div.style.display = "grid";
-		$('#m').focus();
-		return false;
+	$('.login-btn').on("click",function(){
+		login_validate();	
+	});
+	$('.login-input').on("keydown",function(e){
+		if (e.keyCode == 13) {
+			login_validate();
+		}
 	});
 
-	$('#message-form').submit(function(e) {
-		e.preventDefault();
-		msg = $('#m').val();
-		socket.emit('send-message', {user, msg});
-		$('#m').val('');
-		$('#m').focus();
-		return false;
+	$('.message-input').on("keydown",function(e){
+		if (e.keyCode == 13) {
+			send_message();
+		}
+	});
+	$('.message-send').on("click",function(){
+		send_message();	
 	});
 	
 	socket.on('useradded',function(user){
@@ -39,6 +38,31 @@ $(function () {
 		content_div.scrollTop = content_div.scrollHeight;
 	});
 
+
+	/*Functions*/
+	function login_validate(){
+		user = $('#name').val().trim();
+		if(user){
+			socket.emit("useradded",user);
+			login_div.style.display = "none";
+			message_div.style.display = "grid";
+			$('#m').focus();
+		}else{
+			$('#name')[0].setCustomValidity('Enter valid name');
+		}		
+	}
+	function send_message(){
+		msg = $('#m').val().trim();
+		if (msg) {
+			socket.emit('send-message', {user, msg});
+			$('#m').val('');
+			$('#m').focus();		
+		}else{
+			$('#m')[0].setCustomValidity('Enter valid name');
+		}
+	}
+
+/*Developer tools shortcut and right click disable*/
 	$(document).keydown(function (event) {
 		if (event.keyCode == 123) {
 			return false;
