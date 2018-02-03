@@ -4,7 +4,6 @@ $(function () {
 	var content_div = document.getElementById('content');
 	var socket = io("/private");
 	var user = "";
-
 	$('.login-btn').on("click touchstart",function(){
 		login_validate();	
 	});
@@ -33,11 +32,11 @@ $(function () {
 		if (received_data['user'] == user) {
 			$('#messages').append('<li><p class="message-span to">'+received_data['msg']+'</p></li>');
 		}else{
+			Push.create('New Message from '+received_data['user']);
 			$('#messages').append('<li><div class="message-span from"><p style="font-size:x-small">'+received_data['user']+'</p><p>'+received_data['msg']+'</p></div></li>');
 		}
 		content_div.scrollTop = content_div.scrollHeight;
 	});
-
 
 	/*Functions*/
 	function login_validate(){
@@ -46,6 +45,7 @@ $(function () {
 			socket.emit("useradded",user);
 			login_div.style.display = "none";
 			message_div.style.display = "grid";
+			Push.create('Logged in Successfully');
 			$('#m').focus();
 		}else{
 			$('#name')[0].setCustomValidity('Enter valid name');
