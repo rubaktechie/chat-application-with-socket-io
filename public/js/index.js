@@ -5,7 +5,7 @@ $(function () {
 	var socket = io("/private");
 	var user = "";
 
-	$('.login-btn').on("click",function(){
+	$('.login-btn').on("click touchstart",function(){
 		login_validate();	
 	});
 	$('.login-input').on("keydown",function(e){
@@ -19,7 +19,7 @@ $(function () {
 			send_message();
 		}
 	});
-	$('.message-send').on("click",function(){
+	$('.message-send').on("click touchstart",function(){
 		send_message();	
 	});
 	
