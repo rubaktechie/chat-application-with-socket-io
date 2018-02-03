@@ -31,9 +31,9 @@ $(function () {
 	});
 	socket.on('receive-message', function(received_data) {
 		if (received_data['user'] == user) {
-			$('#messages').append('<li><h3 class="message-span to">'+received_data['msg']+'</h3></li>');
+			$('#messages').append('<li><p class="message-span to">'+received_data['msg']+'</p></li>');
 		}else{
-			$('#messages').append('<li><div class="message-span from"><p>'+received_data['user']+'</p><h3>'+received_data['msg']+'</h3></div></li>');
+			$('#messages').append('<li><div class="message-span from"><p style="font-size:x-small">'+received_data['user']+'</p><p>'+received_data['msg']+'</p></div></li>');
 		}
 		content_div.scrollTop = content_div.scrollHeight;
 	});
