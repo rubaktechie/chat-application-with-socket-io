@@ -13,6 +13,7 @@ app.get('/', function(req, res){
 });
 
 nsp.on('connection', function(socket){
+	socket.user = user;
 	socket.on("useradded",function(user){
 		socket.broadcast.emit("useradded", user);
 	});
