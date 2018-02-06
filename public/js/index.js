@@ -32,7 +32,7 @@ $(function () {
 		if (received_data['user'] == user) {
 			$('#messages').append('<li><p class="message-span to">'+received_data['msg']+'</p></li>');
 		}else{
-			Push.create('New Message from '+received_data['user']);
+			showNotification("New Message from", received_data['user']);
 			$('#messages').append('<li><div class="message-span from"><p style="font-size:x-small">'+received_data['user']+'</p><p>'+received_data['msg']+'</p></div></li>');
 		}
 		content_div.scrollTop = content_div.scrollHeight;
@@ -45,7 +45,7 @@ $(function () {
 			socket.emit("useradded",user);
 			login_div.style.display = "none";
 			message_div.style.display = "grid";
-			Push.create('Logged in Successfully');
+			showNotification("Login Successfull", "lets's chat");
 			$('#m').focus();
 		}else{
 			$('#name')[0].setCustomValidity('Enter valid name');
@@ -61,7 +61,23 @@ $(function () {
 			$('#m')[0].setCustomValidity('Enter valid name');
 		}
 	}
-
+	function showNotification(title, message) {
+		if (!("serviceWorker" in window)) {
+			var notification = new Notification("Hello",{
+				body : "Login Successfull",
+				icon : "https://cdn0.iconfinder.com/data/icons/getsoci-2/1460/getsoci1.png"});
+		}else{
+			if (Notification.permission === 'granted') {
+				navigator.serviceWorker.ready.then(function(registration) {
+					console.log("hello")
+					registration.showNotification(title, {
+						body: message,
+						icon: 'https://cdn0.iconfinder.com/data/icons/getsoci-2/1460/getsoci1.png',
+					});
+				});
+			}
+		}
+	}
 /*Developer tools shortcut and right click disable*/
 	$(document).keydown(function (event) {
 		if (event.keyCode == 123) {
