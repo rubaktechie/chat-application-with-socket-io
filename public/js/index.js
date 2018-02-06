@@ -63,8 +63,8 @@ $(function () {
 	}
 	function showNotification(title, message) {
 		if (!("serviceWorker" in window)) {
-			var notification = new Notification("Hello",{
-				body : "Login Successfull",
+			var notification = new Notification(title,{
+				body : message,
 				icon : "https://cdn0.iconfinder.com/data/icons/getsoci-2/1460/getsoci1.png"});
 		}else{
 			if (Notification.permission === 'granted') {
