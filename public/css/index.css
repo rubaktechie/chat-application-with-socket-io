@@ -2,8 +2,7 @@ html,body{
 	height: 100%;
 	width: 100%;
 }
-
-div,ul,input,h1,h2,h3,h4,h5,h6,p{
+html,body,div,ul,input,h1,h2,h3,h4,h5,h6,p{
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -145,3 +144,9 @@ li{
 		margin: 0;
 	}
 }
+@media(max-width: 1200px){
+	body{
+		width: 80%;
+		margin: auto;
+	}
+}	
